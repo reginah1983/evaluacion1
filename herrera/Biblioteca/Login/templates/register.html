@@ -1,0 +1,41 @@
+{% load static %}
+<link rel="shortcut icon" href="{% static 'Biblioteca/img/masculino.ico' %}" type="image/x-icon">
+<link rel="stylesheet" href="{% static 'Biblioteca/css/bootstrap.min.css' %}">
+<link rel="stylesheet" href="{% static 'Biblioteca/css/estilos.css' %}">
+{% block content %}
+<title>Registrar</title>
+<body style="display:flex; align-items:center; justify-content:center;">
+    <div class="login-page">
+        <div class="form1">
+            <form class="register-form" method="POST">
+                {% csrf_token %}
+                <h2>Register</h2>
+                <input type="text" placeholder="Username *" required name="username" />
+                <input type="password" placeholder="Password *" required name="password" />
+                <div class="checkbox-container">
+                    <input type="checkbox" id="is_superuser" name="is_superuser" value="true" class="styled-checkbox">
+                    <label for="is_superuser">Designar como superusuario</label>
+                </div>
+                <button class="btn" type="submit">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    Create
+                </button>
+                {% if error_message %}
+                <br><br>
+                <div class="alert alert-dismissible alert-danger">
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    {{ error_message }}
+                </div>
+                {% endif %}
+                <p class="message1">Already registered? <a href="{% url 'login' %}">Sign In</a></p>
+            </form>
+        </div>
+    </div>
+</body>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.0/js/bootstrap.bundle.min.js"></script>
+{% endblock %}

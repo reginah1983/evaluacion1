@@ -1,0 +1,35 @@
+{% extends "Biblioteca/base.html" %}
+
+{% block content %}
+  <h1 class="text-center m-4" style="font-weight: bold;">Agregar Libro</h1>
+  {% if success %}
+    <div class="alert alert-success" role="alert">
+      Se agregó el producto exitosamente
+      <a href="{% url 'index' %}" class="alert-link">Ir a inicio</a>
+    </div>
+  {% else %}
+    {% if user.is_authenticated %}
+      <div class="row justify-content-center">
+        <div class="col-6">
+          <div class="card border-primary mb-3">
+            <div class="card-header" style="font-weight: bold;">
+              <i class="fa-solid fa-plus fa-beat"></i> Agregar Producto
+            </div>
+            <div class="card-body">
+              <form action="{% url 'add' %}" method="POST">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit"  class="btn btn-outline-success">Agregar</button>
+                <a href="{% url 'index' %}" class="btn btn-outline-danger">Cancelar</a>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% else %}
+    <div class="alert alert-dismissible alert-danger">
+      Debes iniciar sesión para ver el contenido.<a href="{% url 'login' %}" class="alert-link">Login </a>
+   </div>
+    {% endif %}
+  {% endif %}
+{% endblock %}

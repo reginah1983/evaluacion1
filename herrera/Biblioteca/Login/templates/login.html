@@ -1,0 +1,25 @@
+
+{% block content %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'Biblioteca/css/bootstrap.min.css' %}">
+<link rel="stylesheet" href="{% static 'Biblioteca/css/estilos.css' %}">
+<div id="login">
+  <form method="post">
+    {% csrf_token %}
+    <input type="text" class="input" placeholder="Username" required name="username" />
+    <input type="password" class="input" placeholder="Password" required name="password" />
+    {% if messages %}
+      {% for message in messages %}
+        <div class="alert alert-dismissible alert-danger">
+          <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+          <strong>{{ message }}</strong>
+        </div>
+      {% endfor %}
+    {% endif %}
+    <button type="submit" class="submitbtn">Login</button>
+    <p class="message">Not registered? <a href="{% url 'registrar' %}">Create an account</a></p>
+  </form>
+</div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.0/js/bootstrap.bundle.min.js"></script>
+{% endblock %}

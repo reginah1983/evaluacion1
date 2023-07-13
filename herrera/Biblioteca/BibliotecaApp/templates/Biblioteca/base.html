@@ -1,0 +1,330 @@
+<html>
+
+<head>
+  <title>Biblioteca</title>
+  {% load static %}
+ 
+  <link rel="stylesheet" href="{% static 'Biblioteca/css/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link href="{% static 'fontawesomefree/css/fontawesome.css' %}" rel="stylesheet" type="text/css">
+  <link href="{% static 'fontawesomefree/css/brands.css' %}" rel="stylesheet" type="text/css">
+  <link href="{% static 'fontawesomefree/css/solid.css' %}" rel="stylesheet" type="text/css">
+  <style>
+    /* Estilos generales */
+    body {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    .footer {
+      margin-top: auto;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    h1,
+    h2,
+    h3 {
+      color: #333;
+    }
+
+    a {
+      color: #007bff;
+      text-decoration: none;
+    }
+
+    /* Estilos para la sección de productos destacados */
+    #destacados {
+      background-color: #f9f9f9;
+      padding: 40px 0;
+      text-align: center;
+    }
+
+    .productos {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      flex-wrap: wrap;
+    }
+
+    .producto {
+      max-width: 300px;
+      background-color: #fff;
+      padding: 20px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      border-radius: 5px;
+      transition: transform 0.3s ease;
+    }
+
+    .producto:hover {
+      transform: scale(1.05);
+    }
+
+    .producto img {
+      width: 100%;
+      max-height: 200px;
+      object-fit: cover;
+      border-radius: 5px;
+    }
+
+    .producto h3 {
+      margin: 10px 0;
+    }
+
+    .producto p {
+      margin-bottom: 20px;
+    }
+
+    .producto a {
+      display: inline-block;
+      margin-bottom: 10px;
+      transition: color 0.3s;
+    }
+
+    .producto a:hover {
+      color: #0056b3;
+    }
+
+    .producto button {
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      padding: 8px 15px;
+      border-radius: 3px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .producto button:hover {
+      background-color: #0056b3;
+    }
+
+    /* Estilos para la sección de productos nuevos */
+    #novedades {
+      background-color: #fff;
+      padding: 40px 0;
+      text-align: center;
+    }
+
+    /* Estilos para el pie de página */
+    footer {
+      background-color: #333;
+      color: #fff;
+      text-align: center;
+      padding: 20px;
+    }
+
+    /* Estilos generales */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    h1,
+    h2,
+    h3 {
+      color: #333;
+    }
+
+    a {
+      color: #007bff;
+      text-decoration: none;
+    }
+
+    /* Estilos para la sección de productos destacados */
+    #destacados {
+      background-color: #f9f9f9;
+      padding: 40px 0;
+      text-align: center;
+    }
+
+    .productos {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+    }
+
+    .producto {
+      width: 300px;
+      background-color: #fff;
+      padding: 20px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      border-radius: 5px;
+      transition: transform 0.3s ease;
+      margin-bottom: 30px;
+    }
+
+    .producto:hover {
+      transform: scale(1.05);
+    }
+
+    .producto img {
+      width: 100%;
+      max-height: 200px;
+      object-fit: cover;
+      border-radius: 5px;
+    }
+
+    .producto h3 {
+      margin: 10px 0;
+    }
+
+    .producto p {
+      margin-bottom: 20px;
+    }
+
+    .producto .botones {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .producto a {
+      display: inline-block;
+      margin-bottom: 10px;
+      transition: color 0.3s;
+    }
+
+    .producto a:hover {
+      color: #0056b3;
+    }
+
+    .producto button {
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      padding: 8px 15px;
+      border-radius: 3px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .producto button:hover {
+      background-color: #0056b3;
+    }
+
+    /* Estilos para la sección de productos nuevos */
+    #novedades {
+      background-color: #fff;
+      padding: 40px 0;
+      text-align: center;
+    }
+
+    /* Estilos para el pie de página */
+    footer {
+      background-color: #333;
+      color: #fff;
+      text-align: center;
+      padding: 20px;
+    }
+
+    @keyframes pulsacion {
+      0% {
+        transform: scale(1);
+      }
+
+      50% {
+        transform: scale(1.1);
+      }
+
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    .btn-animacion {
+      animation: pulsacion 1s infinite;
+    }
+  </style>
+
+</head>
+
+<body class="d-flex flex-column min-vh-100">
+  <nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
+    <div class="container-fluid">
+      <a href="{% url 'Home' %}">
+        <i class="fas fa-house fa-3x" style="color: #ffffff;"></i>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01"
+        aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarColor01">
+        <ul class="navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" style="font-weight: bold;" href="{% url 'Home' %}">Inventario</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'index' %}"><i class="fa-solid fa-list fa-beat"></i> Listar Libros</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'add' %}"><i class="fa-solid fa-plus fa-beat"></i> Agregar Libros</a>
+          </li>
+        </ul>
+        {% if user.is_authenticated %}
+       
+      
+        <form class="d-flex" method="post" action="{% url 'logout' %}">
+          {% csrf_token %}
+          <input type="hidden" name="next" value="{% url 'login' %}">
+          <button class="btn btn-secondary my-2 my-sm-0" type="submit">Cerrar sesión <i
+              class="fa-solid fa-right-from-bracket fa-xl"></i> </button>
+        </form>
+
+        
+        {% else %}
+        <form class="d-flex" method="post" action="{% url 'login' %}">
+          {% csrf_token %}
+          <button class="btn btn-secondary my-2 my-sm-0" type="submit">
+            <i class="fa-solid fa-user fa-lg"></i>  Login
+
+          </button>
+        </form>
+        {% endif %}
+      </div>
+    </div>
+  </nav>
+  <!--termina la navbar-->
+
+  <!--contenido cambiante-->
+  {% if user.is_authenticated %}
+  <div class="alert alert-dismissible alert-success">
+    <button type="button" class="btn-close" data-bs-dismiss="alert"></button> 
+    <strong>Bienvenido!</strong> {{ user.username }} <a href="#" class="alert-link"></a>.
+  </div>
+  {% endif %}
+    {% block content %}
+
+    {% endblock %}
+
+  <br>
+  <footer class="footer text-faded text-center py-5">
+    <div class="container">
+      <p class="m-0 mbt">
+        <a href="sample.html" class="link">Política de privacidad</a> ·
+        <a href="sample.html" class="link">Aviso legal</a> ·
+        <a href="sample.html" class="link">Cookies</a>
+      </p>
+      <p class="m-0 mbt1" style="font-weight: bold;"> Desarrollado por : </p>
+    </div>
+  </footer>
+  <script src="{% static 'fontawesomefree/js/fontawesome.js' %}"></script>
+  <script src="{% static 'fontawesomefree/js/solid.js' %}"></script>
+  <script src="{% static 'fontawesomefree/js/brands.js' %}"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.0/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

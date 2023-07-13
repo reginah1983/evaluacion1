@@ -1,0 +1,201 @@
+{% extends "Biblioteca/base.html" %}
+{% block content %}
+{% load static %}
+<link href="{% static 'fontawesomefree/css/fontawesome.css' %}" rel="stylesheet" type="text/css">
+<link href="{% static 'fontawesomefree/css/brands.css' %}" rel="stylesheet" type="text/css">
+<link href="{% static 'fontawesomefree/css/solid.css' %}" rel="stylesheet" type="text/css">
+<style>
+  /* Estilos generales */
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+
+  h1,
+  h2,
+  h3 {
+    color: #333;
+  }
+
+  a {
+    color: #007bff;
+    text-decoration: none;
+  }
+
+  /* Estilos para la sección de productos destacados */
+  #destacados {
+    background-color: #f9f9f9;
+    padding: 40px 0;
+    text-align: center;
+  }
+
+  .productos {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+  }
+
+  .producto {
+    width: 300px;
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    transition: transform 0.3s ease;
+    margin-bottom: 30px;
+  }
+
+  .producto:hover {
+    transform: scale(1.05);
+  }
+
+  .producto img {
+    width: 100%;
+    max-height: 200px;
+    object-fit: cover;
+    border-radius: 5px;
+  }
+
+  .producto h3 {
+    margin: 10px 0;
+  }
+
+  .producto p {
+    margin-bottom: 20px;
+  }
+
+  .producto .botones {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .producto a {
+    display: inline-block;
+    margin-bottom: 10px;
+    transition: color 0.3s;
+  }
+
+  .producto a:hover {
+    color: #0056b3;
+  }
+
+  .producto button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+
+  .producto button:hover {
+    background-color: #0056b3;
+  }
+
+  /* Estilos para la sección de productos nuevos */
+  #novedades {
+    background-color: #fff;
+    padding: 40px 0;
+    text-align: center;
+  }
+
+  /* Estilos para el pie de página */
+  footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+  }
+
+  @keyframes pulsacion {
+    0% {
+      transform: scale(1);
+    }
+
+    50% {
+      transform: scale(1.1);
+    }
+
+    100% {
+      transform: scale(1);
+    }
+  }
+
+  .btn-animacion {
+    animation: pulsacion 1s infinite;
+  }
+</style>
+
+<head>
+  <title>Bibliteca</title>
+</head>
+
+<body>
+  <header>
+
+    <nav>
+
+    </nav>
+  </header>
+
+  <main>
+    <h2>Libros Destacados</h2>
+    <section id="destacados">
+      <div class="container">
+        <div class="productos">
+          {% for libros in libro %}
+          {% if libros.estado == 'a' %}
+          <div class="producto">
+            <h3>{{ libros.nombre }}</h3>
+            <p>Precio: {{ libros.precio }} $</p>
+            <a type="button" class="btn btn-outline-success" data-bs-toggle="modal"
+              data-bs-target="#myModal{{libros.id}}">
+              <i class="fa-sharp fa-solid fa-circle-info"></i>
+            </a>
+
+            <a href="{% url 'carro:agregar' libros.id %}" class="btn btn-outline-primary  btn-animacion">
+              <i class="fa-solid fa-cart-shopping align-top"></i>
+            </a>
+
+          </div>
+          <!--MODAL-->
+          <div class="modal" id="myModal{{libros.id}}" tabindex="-1" aria-labelledby="myModalLabel1" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title"> Libros : <strong>{{libros.nombre}}</strong></h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true"></span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <ul class="list-unstyled">
+                    <li>Nombre : <strong> {{libros.nombre}}</strong></li>
+                    <li>Precio : <strong> {{libros.precio}}</strong></li>
+                    <li>Codigo : <strong> {{libros.codigo}}</strong></li>
+                  </ul>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+  </main>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.0/js/bootstrap.bundle.min.js"></script>
+  {% endblock %}
